@@ -1,0 +1,16 @@
+//@version=3
+
+study(title='Simple Buy-Sell Signal', shorttitle='Simple Buy-Sell Signal', overlay=true)
+
+Period=input('720')
+
+longCondition = crossover(security(tickerid, Period, close),security(tickerid, Period, open))
+plotshape(longCondition, style=shape.triangleup,
+          location=location.abovebar, color=green)
+          
+shortCondition = crossunder(security(tickerid, Period, close),security(tickerid, Period, open))
+plotshape(shortCondition, style=shape.triangledown,
+          location=location.abovebar, color=red)
+
+alertcondition(longCondition, "buy", "buy")
+alertcondition(shortCondition, "sell", "sell")
